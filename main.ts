@@ -8,7 +8,7 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Me.isHittingTile(CollisionDirection.Bottom)) {
-        Me.vy = -200
+        Me.vy = -180
     }
 })
 scene.onHitWall(SpriteKind.FlyingObject, function (sprite, location) {
