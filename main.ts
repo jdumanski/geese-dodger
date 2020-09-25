@@ -73,8 +73,10 @@ controller.moveSprite(Me, 100, 0)
 Me.setFlag(SpriteFlag.StayInScreen, false)
 effects.clouds.startScreenEffect(5000)
 game.onUpdateInterval(1000, function () {
-    Speed1 += -20
-    Speed2 += -20
+    if (info.score() % 10 == 0) {
+        Speed1 += -20
+        Speed2 += -20
+    }
     Geese = sprites.createProjectileFromSide(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
