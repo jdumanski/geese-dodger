@@ -1,3 +1,8 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (Me.isHittingTile(CollisionDirection.Bottom)) {
+        Me.vy = -240
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Me.isHittingTile(CollisionDirection.Bottom)) {
         Me.vy = -200
@@ -7,6 +12,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     game.over(false)
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
+    music.baDing.play()
+})
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
 })
 let Geese: Sprite = null
