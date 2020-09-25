@@ -6,6 +6,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     game.over(false)
 })
+controller.A.onEvent(ControllerButtonEvent.Released, function () {
+    music.baDing.play()
+})
 let Geese: Sprite = null
 let mySprite: Sprite = null
 let Me: Sprite = null
@@ -66,6 +69,9 @@ game.onUpdateInterval(1000, function () {
         `, randint(Counter_2, Counter), 0)
     tiles.placeOnTile(Geese, tiles.getTileLocation(9, 5))
     info.changeScoreBy(1)
+})
+forever(function () {
+    music.playMelody("B A F E G F A C5 ", 166)
 })
 forever(function () {
     scene.setBackgroundImage(img`
