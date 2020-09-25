@@ -45,12 +45,13 @@ Me = sprites.create(img`
     . . . . . . f f f f f f . . . . 
     . . . . . . . f f f . . . . . . 
     `, SpriteKind.Player)
-tiles.placeOnTile(Me, tiles.getTileLocation(1, 5))
+tiles.placeOnTile(Me, tiles.getTileLocation(1, 0))
 Me.ay = 500
 let Counter = -100
 let Counter_2 = -80
 controller.moveSprite(Me, 100, 0)
 Me.setFlag(SpriteFlag.StayInScreen, false)
+effects.clouds.startScreenEffect(5000)
 game.onUpdateInterval(1000, function () {
     Counter += -20
     Counter_2 += -20
