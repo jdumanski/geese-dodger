@@ -67,14 +67,14 @@ Me = sprites.create(img`
     `, SpriteKind.Player)
 tiles.placeOnTile(Me, tiles.getTileLocation(1, 0))
 Me.ay = 500
-let Counter = -100
-let Counter_2 = -80
+let Speed1 = -100
+let Speed2 = -80
 controller.moveSprite(Me, 100, 0)
 Me.setFlag(SpriteFlag.StayInScreen, false)
 effects.clouds.startScreenEffect(5000)
 game.onUpdateInterval(1000, function () {
-    Counter += -20
-    Counter_2 += -20
+    Speed1 += -20
+    Speed2 += -20
     Geese = sprites.createProjectileFromSide(img`
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
@@ -92,7 +92,7 @@ game.onUpdateInterval(1000, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
-        `, randint(Counter_2, Counter), 0)
+        `, randint(Speed2, Speed1), 0)
     tiles.placeOnTile(Geese, tiles.getTileLocation(9, 5))
     info.changeScoreBy(1)
 })
