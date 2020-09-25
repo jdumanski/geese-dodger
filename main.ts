@@ -7,6 +7,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     game.over(false)
 })
 let Geese: Sprite = null
+let mySprite: Sprite = null
 let Me: Sprite = null
 tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
     . . . . . . . . . . 
@@ -40,6 +41,8 @@ tiles.placeOnTile(Me, tiles.getTileLocation(1, 5))
 Me.ay = 500
 let Counter = -100
 let Counter_2 = -80
+controller.moveSprite(Me)
+mySprite.setFlag(SpriteFlag.StayInScreen, false)
 game.onUpdateInterval(1000, function () {
     Counter += -20
     Counter_2 += -20
