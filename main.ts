@@ -12,6 +12,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
     info.changeLifeBy(-1)
     scene.cameraShake(8, 500)
     Geese.destroy()
+    Flying_Geese.destroy()
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
@@ -22,6 +23,7 @@ info.onLifeZero(function () {
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
 })
+let Flying_Geese: Sprite = null
 let Geese: Sprite = null
 let Me: Sprite = null
 tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
@@ -81,6 +83,29 @@ game.onUpdateInterval(1000, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, randint(Counter_2, Counter), 0)
+    if (info.score() >= 10 && randint(0, 9) == 0) {
+        Flying_Geese = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . 1 . . . . . . 
+            . . . . 1 1 . . 1 . . . . . . . 
+            . . . 4 f 1 . 1 1 1 1 . . . . . 
+            . . . . . 1 1 1 1 1 . . . . . . 
+            . . . . . . 1 1 1 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.Projectile)
+        Flying_Geese.setPosition(160, 65)
+        Flying_Geese.setVelocity(-100, 0)
+        info.changeScoreBy(1)
+    }
     tiles.placeOnTile(Geese, tiles.getTileLocation(9, 5))
     info.changeScoreBy(1)
 })
