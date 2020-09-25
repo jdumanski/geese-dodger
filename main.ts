@@ -22,6 +22,9 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, ot
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
 })
+scene.onHitWall(SpriteKind.Food, function (sprite, location) {
+    PowerUp.destroy()
+})
 info.onLifeZero(function () {
     game.over(false)
 })
@@ -33,6 +36,11 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.FlyingObject, function (sprite, 
     scene.cameraShake(8, 500)
     Flying_Geese.destroy()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    info.changeLifeBy(1)
+    PowerUp.destroy()
+})
+let PowerUp: Sprite = null
 let Geese: Sprite = null
 let Flying_Geese: Sprite = null
 let Me: Sprite = null
@@ -72,6 +80,28 @@ let Speed2 = -80
 controller.moveSprite(Me, 100, 0)
 Me.setFlag(SpriteFlag.StayInScreen, false)
 effects.clouds.startScreenEffect(5000)
+game.onUpdateInterval(5000, function () {
+    PowerUp = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . 2 . . . 2 . . . . . . 
+        . . . . 2 2 2 . 2 2 2 . . . . . 
+        . . . . . 2 2 2 2 2 . . . . . . 
+        . . . . . 2 2 2 2 2 . . . . . . 
+        . . . . . . 2 2 2 . . . . . . . 
+        . . . . . . . 2 . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Food)
+    PowerUp.setVelocity(-100, 0)
+    PowerUp.setPosition(160, randint(30, 90))
+})
 game.onUpdateInterval(1000, function () {
     if (info.score() % 10 == 0) {
         Speed1 += -20
