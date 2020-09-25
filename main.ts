@@ -4,10 +4,15 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
-    game.over(false)
+    info.changeLifeBy(-1)
+    scene.cameraShake(8, 500)
+    Geese.destroy()
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
+})
+info.onLifeZero(function () {
+    game.over(false)
 })
 let Geese: Sprite = null
 let Me: Sprite = null
@@ -21,6 +26,7 @@ tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000
     2 2 2 2 2 2 2 2 2 2 
     2 2 2 2 2 2 2 2 2 2 
     `, [myTiles.transparency16,sprites.dungeon.darkGroundNorth], TileScale.Sixteen))
+info.setLife(3)
 Me = sprites.create(img`
     . . . . . . f f f f f f . . . . 
     . . . . f f e e e e f 2 f . . . 
