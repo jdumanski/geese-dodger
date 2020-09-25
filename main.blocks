@@ -1,0 +1,44 @@
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable type="KIND_SpriteKind" id="?rE}zMFod[!?eA+i~~ih">Player</variable><variable type="KIND_SpriteKind" id="]B+is%#Mo$sjV8_rT4kW">Projectile</variable><variable type="KIND_SpriteKind" id="@]cJR*kP]FMTmJcG`_wH">Food</variable><variable type="KIND_SpriteKind" id="$6;etl{Qzr)U[L{7^~HS">Enemy</variable><variable id="h8^c.JKFKvJ,JrSE[38=">Me</variable><variable id=")IdMD]@Bqc$OK0DBEJDM">mySprite</variable><variable id="3lo8[cw!{U=eVSNR$T=g">Geese</variable><variable id="bn.aB6UEe#qv5eX?{Mg.">Counter</variable><variable id=":1k0(jXfgw^qdlR{.:lG">Counter 2</variable></variables><block type="pxt-on-start" x="10" y="0"><statement name="HANDLER"><block type="tilemap_editor"><field name="tilemap">tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 
+`, [myTiles.transparency16,sprites.dungeon.darkGroundNorth], TileScale.Sixteen)</field><next><block type="variables_set"><field name="VAR" id="h8^c.JKFKvJ,JrSE[38=">Me</field><value name="VALUE"><shadow xmlns="http://www.w3.org/1999/xhtml" type="math_number"><field name="NUM">0</field></shadow><block type="spritescreate"><value name="img"><shadow type="screen_image_picker"><field name="img">img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . 2 2 . . . . . . . . . . . 
+. . . 2 2 2 2 2 . . . . . . . . 
+. . . 2 . . . . . . . . . . . . 
+. 2 2 2 2 2 2 . . . . . . . . . 
+. 2 2 2 2 2 2 2 2 2 2 . . . . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 . . 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`</field></shadow></value><value name="kind"><shadow type="spritekind"><field name="MEMBER">Player</field></shadow></value></block></value><next><block type="mapplaceontile"><value name="sprite"><block type="variables_get"><field name="VAR" id="h8^c.JKFKvJ,JrSE[38=">Me</field></block></value><value name="loc"><shadow type="mapgettile"><value name="col"><shadow type="math_number"><field name="NUM">1</field></shadow></value><value name="row"><shadow type="math_number"><field name="NUM">5</field></shadow></value></shadow></value><next><block type="Sprite_blockCombine_set"><field name="property">Sprite.ay@set</field><value name="mySprite"><block type="variables_get"><field name="VAR" id="h8^c.JKFKvJ,JrSE[38=">Me</field></block></value><value name="value"><shadow type="math_number"><field name="NUM">500</field></shadow></value><next><block type="variables_set"><field name="VAR" id="bn.aB6UEe#qv5eX?{Mg.">Counter</field><value name="VALUE"><shadow type="math_number"><field name="NUM">-100</field></shadow></value><next><block type="variables_set"><field name="VAR" id=":1k0(jXfgw^qdlR{.:lG">Counter 2</field><value name="VALUE"><shadow type="math_number"><field name="NUM">-80</field></shadow></value></block></next></block></next></block></next></block></next></block></next></block></statement></block><block type="keyonevent" x="0" y="380"><field name="button">controller.A</field><field name="event">ControllerButtonEvent.Pressed</field><statement name="HANDLER"><block type="controls_if"><value name="IF0"><shadow type="logic_boolean"><field name="BOOL">TRUE</field></shadow><block type="spritehasobstacle"><field name="direction">CollisionDirection.Bottom</field><value name="sprite"><block type="variables_get"><field name="VAR" id="h8^c.JKFKvJ,JrSE[38=">Me</field></block></value></block></value><statement name="DO0"><block type="Sprite_blockCombine_set"><field name="property">Sprite.vy@set</field><value name="mySprite"><block type="variables_get"><field name="VAR" id="h8^c.JKFKvJ,JrSE[38=">Me</field></block></value><value name="value"><shadow type="math_number"><field name="NUM">-200</field></shadow></value></block></statement></block></statement></block><block type="gameinterval" x="11" y="670"><value name="period"><shadow type="timePicker"><field name="ms">1000</field></shadow></value><statement name="HANDLER"><block type="variables_change"><field name="VAR" id="bn.aB6UEe#qv5eX?{Mg.">Counter</field><value name="VALUE"><shadow type="math_number"><field name="NUM">-20</field></shadow></value><next><block type="variables_change"><field name="VAR" id=":1k0(jXfgw^qdlR{.:lG">Counter 2</field><value name="VALUE"><shadow type="math_number"><field name="NUM">-20</field></shadow></value><next><block type="variables_set"><field name="VAR" id="3lo8[cw!{U=eVSNR$T=g">Geese</field><value name="VALUE"><shadow xmlns="http://www.w3.org/1999/xhtml" type="math_number"><field name="NUM">0</field></shadow><block type="spritescreateprojectilefromside"><value name="img"><shadow type="screen_image_picker"><field name="img">img`
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . 1 1 . . . . . . . . . . 
+. . . 4 f 1 . . . . . . . . . . 
+. . . . . 1 1 1 . . . . . . . . 
+. . . . . 1 1 1 . . . . . . . . 
+. . . . . 4 . 4 . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+. . . . . . . . . . . . . . . . 
+`</field></shadow></value><value name="vx"><shadow type="spriteSpeedPicker"><field name="speed">100</field></shadow><block type="device_random"><value name="min"><shadow type="math_number"><field name="NUM">-100</field></shadow><block type="variables_get"><field name="VAR" id=":1k0(jXfgw^qdlR{.:lG">Counter 2</field></block></value><value name="limit"><shadow type="math_number"><field name="NUM">-80</field></shadow><block type="variables_get"><field name="VAR" id="bn.aB6UEe#qv5eX?{Mg.">Counter</field></block></value></block></value><value name="vy"><shadow type="spriteSpeedPicker"><field name="speed">0</field></shadow></value></block></value><next><block type="mapplaceontile"><value name="sprite"><block type="variables_get"><field name="VAR" id="3lo8[cw!{U=eVSNR$T=g">Geese</field></block></value><value name="loc"><shadow type="mapgettile"><value name="col"><shadow type="math_number"><field name="NUM">9</field></shadow></value><value name="row"><shadow type="math_number"><field name="NUM">5</field></shadow></value></shadow></value><next><block type="hudChangeScoreBy"><value name="value"><shadow type="math_number"><field name="NUM">1</field></shadow></value></block></next></block></next></block></next></block></next></block></statement></block><block type="spritesoverlap" x="10" y="1020"><value name="HANDLER_DRAG_PARAM_sprite"><shadow type="argument_reporter_custom"><mutation typename="Sprite"/><field name="VALUE">sprite</field></shadow></value><value name="kind"><shadow type="spritekind"><field name="MEMBER">Player</field></shadow></value><value name="HANDLER_DRAG_PARAM_otherSprite"><shadow type="argument_reporter_custom"><mutation typename="Sprite"/><field name="VALUE">otherSprite</field></shadow></value><value name="otherKind"><shadow type="spritekind"><field name="MEMBER">Projectile</field></shadow></value><statement name="HANDLER"><block type="gameOver"><mutation xmlns="http://www.w3.org/1999/xhtml" _expanded="0" _input_init="false"></mutation><value name="win"><shadow type="toggleWinLose"><field name="win">false</field></shadow></value></block></statement></block></xml>
