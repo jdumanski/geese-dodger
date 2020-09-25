@@ -49,7 +49,7 @@ tiles.placeOnTile(Me, tiles.getTileLocation(1, 5))
 Me.ay = 500
 let Counter = -100
 let Counter_2 = -80
-controller.moveSprite(Me)
+controller.moveSprite(Me, 100, 0)
 Me.setFlag(SpriteFlag.StayInScreen, false)
 game.onUpdateInterval(1000, function () {
     Counter += -20
