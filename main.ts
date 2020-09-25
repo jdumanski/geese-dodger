@@ -43,6 +43,7 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.FlyingObject, function (sprite, 
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     info.changeLifeBy(1)
+    music.magicWand.play()
     PowerUp.destroy()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Pup, function (sprite, otherSprite) {
@@ -137,8 +138,8 @@ game.onUpdateInterval(15000, function () {
 })
 game.onUpdateInterval(1000, function () {
     if (info.score() % 10 == 0) {
-        Speed1 += -20
-        Speed2 += -20
+        Speed1 += -30
+        Speed2 += -30
     }
     Geese = sprites.createProjectileFromSide(img`
         . . . . . . . . . . . . . . . . 
