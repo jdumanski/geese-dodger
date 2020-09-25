@@ -1,3 +1,6 @@
+namespace SpriteKind {
+    export const FlyingObject = SpriteKind.create()
+}
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Me.isHittingTile(CollisionDirection.Bottom)) {
         Me.vy = -240
@@ -8,11 +11,13 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         Me.vy = -200
     }
 })
+scene.onHitWall(SpriteKind.FlyingObject, function (sprite, location) {
+    Flying_Geese.destroy()
+})
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
     scene.cameraShake(8, 500)
     Geese.destroy()
-    Flying_Geese.destroy()
 })
 controller.A.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
@@ -23,8 +28,13 @@ info.onLifeZero(function () {
 controller.B.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
 })
-let Flying_Geese: Sprite = null
+sprites.onOverlap(SpriteKind.Player, SpriteKind.FlyingObject, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    scene.cameraShake(8, 500)
+    Flying_Geese.destroy()
+})
 let Geese: Sprite = null
+let Flying_Geese: Sprite = null
 let Me: Sprite = null
 tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
     . . . . . . . . . . 
@@ -83,29 +93,6 @@ game.onUpdateInterval(1000, function () {
         . . . . . . . . . . . . . . . . 
         . . . . . . . . . . . . . . . . 
         `, randint(Counter_2, Counter), 0)
-    if (info.score() >= 10 && randint(0, 9) == 0) {
-        Flying_Geese = sprites.create(img`
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . 1 . . . . . . 
-            . . . . 1 1 . . 1 . . . . . . . 
-            . . . 4 f 1 . 1 1 1 1 . . . . . 
-            . . . . . 1 1 1 1 1 . . . . . . 
-            . . . . . . 1 1 1 . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            . . . . . . . . . . . . . . . . 
-            `, SpriteKind.Projectile)
-        Flying_Geese.setPosition(160, 65)
-        Flying_Geese.setVelocity(-100, 0)
-        info.changeScoreBy(1)
-    }
     tiles.placeOnTile(Geese, tiles.getTileLocation(9, 5))
     info.changeScoreBy(1)
 })
@@ -235,4 +222,29 @@ forever(function () {
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
         `)
+})
+game.onUpdateInterval(10000, function () {
+    if (info.score() >= 10) {
+        Flying_Geese = sprites.create(img`
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . 1 . . . . . . 
+            . . . . 1 1 . . 1 . . . . . . . 
+            . . . 4 f 1 . 1 1 1 1 . . . . . 
+            . . . . . 1 1 1 1 1 . . . . . . 
+            . . . . . . 1 1 1 . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            . . . . . . . . . . . . . . . . 
+            `, SpriteKind.FlyingObject)
+        Flying_Geese.setPosition(160, 65)
+        Flying_Geese.setVelocity(-120, 0)
+        info.changeScoreBy(3)
+    }
 })
