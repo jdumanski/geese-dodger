@@ -10,7 +10,6 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
     music.baDing.play()
 })
 let Geese: Sprite = null
-let mySprite: Sprite = null
 let Me: Sprite = null
 tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
     . . . . . . . . . . 
@@ -45,7 +44,7 @@ Me.ay = 500
 let Counter = -100
 let Counter_2 = -80
 controller.moveSprite(Me)
-mySprite.setFlag(SpriteFlag.StayInScreen, false)
+Me.setFlag(SpriteFlag.StayInScreen, false)
 game.onUpdateInterval(1000, function () {
     Counter += -20
     Counter_2 += -20
@@ -71,7 +70,7 @@ game.onUpdateInterval(1000, function () {
     info.changeScoreBy(1)
 })
 forever(function () {
-    music.playMelody("B A F E G F A C5 ", 166)
+    music.playMelody("B A F E G F A C5 ", 294)
 })
 forever(function () {
     scene.setBackgroundImage(img`
