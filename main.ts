@@ -1,3 +1,8 @@
+controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (Me.isHittingTile(CollisionDirection.Bottom)) {
+        Me.vy = -240
+    }
+})
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Me.isHittingTile(CollisionDirection.Bottom)) {
         Me.vy = -200
@@ -13,6 +18,9 @@ controller.A.onEvent(ControllerButtonEvent.Released, function () {
 })
 info.onLifeZero(function () {
     game.over(false)
+})
+controller.B.onEvent(ControllerButtonEvent.Released, function () {
+    music.baDing.play()
 })
 let Geese: Sprite = null
 let Me: Sprite = null
