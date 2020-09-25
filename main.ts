@@ -1,5 +1,7 @@
 namespace SpriteKind {
     export const FlyingObject = SpriteKind.create()
+    export const PowerUp = SpriteKind.create()
+    export const Pup = SpriteKind.create()
 }
 controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     if (Me.isHittingTile(CollisionDirection.Bottom)) {
@@ -13,6 +15,9 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 scene.onHitWall(SpriteKind.FlyingObject, function (sprite, location) {
     Flying_Geese.destroy()
+})
+scene.onHitWall(SpriteKind.Pup, function (sprite, location) {
+    SlowDown.destroy()
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
@@ -40,8 +45,14 @@ sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSpr
     info.changeLifeBy(1)
     PowerUp.destroy()
 })
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Pup, function (sprite, otherSprite) {
+    Speed1 += 20
+    Speed2 += 20
+    SlowDown.destroy()
+})
 let PowerUp: Sprite = null
 let Geese: Sprite = null
+let SlowDown: Sprite = null
 let Flying_Geese: Sprite = null
 let Me: Sprite = null
 tiles.setTilemap(tiles.createTilemap(hex`0a0008000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000101010101010101010101010101010101010101`, img`
@@ -100,7 +111,29 @@ game.onUpdateInterval(5000, function () {
         . . . . . . . . . . . . . . . . 
         `, SpriteKind.Food)
     PowerUp.setVelocity(-100, 0)
-    PowerUp.setPosition(160, randint(30, 90))
+    PowerUp.setPosition(160, randint(35, 90))
+})
+game.onUpdateInterval(15000, function () {
+    SlowDown = sprites.create(img`
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . 8 . . . . . . . 
+        . . . . . . . . 8 . . . . . . . 
+        . . . . . . . . 8 . . . . . . . 
+        . . . . . . 8 . 8 . 8 . . . . . 
+        . . . . . . . 8 8 8 . . . . . . 
+        . . . . . . . . 8 . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        . . . . . . . . . . . . . . . . 
+        `, SpriteKind.Pup)
+    SlowDown.setVelocity(-100, 0)
+    SlowDown.setPosition(280, randint(35, 90))
 })
 game.onUpdateInterval(1000, function () {
     if (info.score() % 10 == 0) {
